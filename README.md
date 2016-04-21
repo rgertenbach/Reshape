@@ -1,6 +1,6 @@
 # Reshape
 Tables in Spreadsheets can be one or two dimensional.   
-Two dimensional tables are easier on the eye but less flexible.
+Two dimensional tables are easier on the eye but less flexible.  
 Reshape for Google Spreadsheets provides functions to easily reshape the data between the two formats.
 
 ## One Dimensional (long) Tables
@@ -32,7 +32,7 @@ Two dimensional tables have columns that identify an entry but they contain mult
 | APAC   | South korea    | 4,358,930 | 8,437,224 |
 
 ## The Melt command
-Every table can be created from a long table using pivoting and row filters but manually entered data is o
+Every table can be created from a long table using pivoting and row filters but manually entered data is often entered in a two dimensional format because it allows for esier direct comparison without data manipulation and uses the screen more effectively.  
 The melt command takes such a two dimensional table and transforms it into the long format to increase flexibility in how the  data can be transformed.
 
     =MELT(<Table>, <ID Columns>)
