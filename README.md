@@ -35,8 +35,8 @@ Two dimensional tables have columns that identify an entry but they contain mult
 Every table can be created from a long table using pivoting and row filters but manually entered data is often entered in a two dimensional format because it allows for esier direct comparison without data manipulation and uses the screen more effectively.  
 The melt command takes such a two dimensional table and transforms it into the long format to increase flexibility in how the  data can be transformed.
 
-    =MELT(<Table>, <ID Columns>)
-    =MELT(A1:D5, A1:B1)
+    =MELT(<Table>, *<ID Columns>*, *<Measure Column Name>*, *<Value Column Name>*)
+    =MELT(A1:D5, A1:B1, "Quarter", "Revenue")
 
 ### Parameters
 **Table**
@@ -51,6 +51,14 @@ In the example above they would be "Region" and "Country" which can be supplied 
 The ID columns parameter is **optional**, if a table only consists of columns of values that should be transformed into a table identifying the measure and giving the corresponding value then no ID columns exist and they thus do not need to be provided.
 
 If every column is an ID column and no value columns exist the output will be blank as there are no values for any combination of identifiers.
+
+**Measure Column Name**
+
+The Measure Column name is **optional**. It names the column that contains the names of the molten columns
+
+**Value Column Name***
+
+The Value Column name is **optional**. It names the column that contains the molten values.
 
 ## The Cast Command
 The cast command is almost superfluous given `QUERY` and Pivot Tables exist but it has been included for completeness sake.
