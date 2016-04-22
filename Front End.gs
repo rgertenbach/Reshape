@@ -3,15 +3,22 @@
  *
  * @param {A1:F8} Range  The range to be molten into a long format
  * @param {A1:C1} IDs   The range with the column headers
+ * @param {"Quarter"} Measure  The name of the column that will contain the molten columns names. (Default is "measure")
+ * @param {"Revenue"} Value  The name of the column that will contain the molten values (Default is "value")
  * @return {Molten range}
  * @customfunction
  */
-function melt(Range, IDs) {
-  Range = table(Range, 0);
+function melt(Range, IDs, Measure, Value) {
+  Range = table(Range, 0); 
+  Measure = Measure || "measure";
+  Value = Value || "value"; 
   if (typeof(IDs) !== "object" && IDs !== undefined) {IDs = [IDs];}
   if (IDs !== undefined) {arguments = [Range].concat(IDs[0]);}
   Range = meltTable.apply(this, arguments);
-  return untable(Range);
+  Range = untable(Range);
+  Range[0][Range[0].indexOf("measure")] = Measure;
+  Range[0][Range[0].indexOf("value")] = Value;
+  return Range;
 }
 
 /**
