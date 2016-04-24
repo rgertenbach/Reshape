@@ -8,6 +8,7 @@ function castTable(data, measure, value, def) {
   idCols.splice(idCols.indexOf(value), 1);
 
   function findFreeRow(row) {
+    if (idCols.length === 0) {return output[currentMeasure].length;}
     for (var oRow = 0; oRow < nRow(output); oRow++) {
       for (var idCol in idCols) {
         var currentId = idCols[idCol];
