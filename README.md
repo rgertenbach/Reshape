@@ -64,7 +64,7 @@ The Value Column name is **optional**. It names the column that contains the mol
 The cast command is almost superfluous given `QUERY` and Pivot Tables exist but it has been included for completeness sake.
 What makes this function potentially useful is that it has purposely been designed not to aggregae data where multiple rows with the same identifiers are present. More on that later.
 
-    =CAST(<Table>, <Measure Column>, <Value Column>)
+    =CAST(<Table>, <Measure Column>, <Value Column>, <Default Value>)
     =CAST(A1:D9, C1, D1)
 
 ### Parameters
@@ -79,6 +79,11 @@ The Measure Column is the Address or Name of the Column identifying the name of 
 **Value Column**
 
 The Value column is the column that contains the actual measurement that will be populated into the two dimensional matrix identified by the ID columns in the separate measureing columns,
+
+**Default Value**
+
+The Default Value parameter is **optional**.   
+The default value is the value a cell gets if there is no actual data for the combination of ID variables and the measurement variable. The default value of the parameter is am empty string which is equal to a blank cell in Google Spreadsheet.
 
 ### Non aggregation
 To make the existence of this function a bit worthwhile it does not aggregate anything, it kind of works like a pivot table that keeps every value intact.
