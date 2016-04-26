@@ -1,17 +1,29 @@
 /**
  * Melts a wide table into a long Format.
  *
- * @param {A1:F8} Range  The range to be molten into a long format
- * @param {A1:C1} IDs   The range with the column headers
- * @param {"Quarter"} Measure  The name of the column that will contain the molten columns names. (Default is "measure")
- * @param {"Revenue"} Value  The name of the column that will contain the molten values (Default is "value")
+ * @param {A1:F8} Range  The range to be molten into a long format.
+ * @param {A1:C1} IDs  A range with the column headers.
+ *   If a column header is blank it gets the Number of the column.
+ *   Such Ranges maybe creates like this: {"Country", "Year", "3"}.
+ *
+ * @param {"Quarter"} Measure  Name of the column containing the molten columns'
+ *   names (Default is "measure").
+ *
+ * @param {"Revenue"} Value  Name of the column containing the molten values
+ *  (Default is "value").
+ *
  * @return {Molten range}
  * @customfunction
  */
 function melt(Range, IDs, Measure, Value) {
-  Range = table(Range, 0); 
+  for (col in Range[0]) {
+    if (Range[0][col] === "") {
+      Range[0][col] = String(Number(col) + 1);
+    }
+  }
+  Range = table(Range, 0);
   Measure = Measure || "measure";
-  Value = Value || "value"; 
+  Value = Value || "value";
   if (typeof(IDs) !== "object" && IDs !== undefined) {IDs = [IDs];}
   if (IDs !== undefined) {arguments = [Range].concat(IDs[0]);}
   Range = meltTable.apply(this, arguments);
@@ -25,10 +37,13 @@ function melt(Range, IDs, Measure, Value) {
  * Casts a long table into a wide format.
  *
  * @param {A1:D30} Range  The range to be cast into a wide format
- * @param {"Year"} MeasureColumn  The Header of the Column that indicates the headers of the pivoted values.
- * @param {"Value"} ValueColumn  The Header of the Column that contains the values to be pivoted.
- * @param {"N/A"} defaultValue  The default value used to fill unused cells with (default = "").
+ * @param {"Year"} MeasureColumn  The Header of the Column containing the
+ *  headers of the pivoted values.
  *
+ * @param {"Value"} ValueColumn  The Header of the Column contaiing the values
+ *  to be pivoted.
+ * @param {"N/A"} defaultValue  The default value used to fill empty cells
+ *  (default = "").
  * @return {"Cast Range"}
  * @customfunction
  */
