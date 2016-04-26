@@ -41,12 +41,14 @@ The melt command takes such a two dimensional table and transforms it into the l
 ### Parameters
 **Table**
 
-Table is the range of the actual table (such as `A1:D5`)
+Table is the range of the actual table (such as `A1:D5`)  
+If the table has no headers you must include an empty row on the top of the Range. If that is not possible you can amend it by writing `{"", "", "", ""; <Range>}` where you provide as many comma separated empty strings as there are columns.
 
 **ID Columns**
 
-The ID Columns are the range of the headers identifying the the ID columns, i,e. the columns that are not pivoted.
-In the example above they would be "Region" and "Country" which can be supplied with either `A1:B1` or `{"Region"; "Country"}`.
+The ID Columns are the range of the headers identifying the the ID columns, i,e. the columns that are not pivoted.  
+In the example above they would be "Region" and "Country" which can be supplied with either `A1:B1` or `{"Region"; "Country"}`.  
+If a column header is blank (such as a dimension in a Pivot table it will automatically be given its 1-based numeric index as a header. (e.g. if the headers Region and Country are missing because you are melting a pivot table you can use `=MELT(A1:D5, {1,2}, "Quarter", "Revenue")`
 
 The ID columns parameter is **optional**, if a table only consists of columns of values that should be transformed into a table identifying the measure and giving the corresponding value then no ID columns exist and they thus do not need to be provided.
 
