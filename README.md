@@ -32,7 +32,7 @@ Two dimensional tables have columns that identify an entry but they contain mult
 | APAC   | South korea    | 4,358,930 | 8,437,224 |
 
 ## The Melt command
-Every table can be created from a long table using pivoting and row filters but manually entered data is often entered in a two dimensional format because it allows for esier direct comparison without data manipulation and uses the screen more effectively.  
+Every table format can be created from a long table using pivoting and row filters but manually entered data is often entered in a two dimensional format because it allows for easier direct comparison without data manipulation and uses the screen more effectively.  
 The melt command takes such a two dimensional table and transforms it into the long format to increase flexibility in how the  data can be transformed.
 
     =MELT(<Table>, *<ID Columns>*, *<Measure Column Name>*, *<Value Column Name>*)
@@ -94,8 +94,8 @@ This allows you to preserve multiple observations with identical identifying col
 If there is a second column that has the same identifying values it will be appended as a new row.
 
 #### Exampe:
-| Region | Country        | Quarter | Revenue |
-| ------ | -------------- | ------- | -------:|
+| Region | Country        | Quarter | Revenue   |
+| ------ | -------------- | ------- | ---------:|
 | EMEA   | Germany        | 2016 Q1 | 1,806,091 |
 | EMEA   | United Kingdom | 2016 Q1 | 3,093,249 |
 | EMEA   | Germany        | 2016 Q1 | 1,647,362 |
