@@ -2,14 +2,14 @@
  * Melts a wide table into a long Format.
  *
  * @param {A1:F8} Range  The range to be molten into a long format.
- * @param {A1:C1} IDs  A range with the column headers.
+ * @param {A1:C1} IDs  (Optional) A range with the column headers.
  *   If a column header is blank it gets the Number of the column.
  *   Such Ranges maybe creates like this: {"Country", "Year", "3"}.
  *
- * @param {"Quarter"} Measure  Name of the column containing the molten columns'
+ * @param {"Quarter"} Measure  (Optional) Name of the column containing the molten columns'
  *   names (Default is "measure").
  *
- * @param {"Revenue"} Value  Name of the column containing the molten values
+ * @param {"Revenue"} Value  (Optional) Name of the column containing the molten values
  *  (Default is "value").
  *
  * @return {Molten range}
