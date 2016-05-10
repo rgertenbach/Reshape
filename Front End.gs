@@ -12,15 +12,32 @@
  * @param {"Revenue"} Value  (Optional) Name of the column containing the molten values
  *  (Default is "value").
  *
+ * @param {"Columns"} BlanksBehavior  (Optional) Sets the behavior of how to treat blank 
+ *  columns and rows.-1 (Default) Does not Filter. 0 Filters out blank rows and columns.
+ *  1 Filters blank rows. 2 Filters blank columns.
+ *
  * @return {Molten range}
  * @customfunction
  */
-function melt(Range, IDs, Measure, Value) {
+function melt(Range, IDs, Measure, Value, BlanksBehavior) {
+  if (BlanksBehavior === undefined) {
+    BlanksBehavior = -1;
+  }
+
+  if (!(BlanksBehavior >= -1 && BlanksBehavior <= 2)) {
+    throw "Blanks Behavior invalid";
+  }
+  
+  if (BlanksBehavior != -1) {
+    Range = filterMatrix(Range, BlanksBehavior);
+  }
+  
   for (col in Range[0]) {
     if (Range[0][col] === "") {
       Range[0][col] = String(Number(col) + 1);
     }
   }
+  
   Range = table(Range, 0);
   Measure = Measure || "measure";
   Value = Value || "value";
