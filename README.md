@@ -35,7 +35,7 @@ Two dimensional tables have columns that identify an entry but they contain mult
 Every table format can be created from a long table using pivoting and row filters but manually entered data is often entered in a two dimensional format because it allows for easier direct comparison without data manipulation and uses the screen more effectively.  
 The melt command takes such a two dimensional table and transforms it into the long format to increase flexibility in how the  data can be transformed.
 
-    =MELT(<Table>, *<ID Columns>*, *<Measure Column Name>*, *<Value Column Name>*)
+    =MELT(<Table>, *<ID Columns>*, <Measure Column Name>, <Value Column Name>, <Blanks Behavior>)
     =MELT(A1:D5, A1:B1, "Quarter", "Revenue")
 
 ### Parameters
@@ -61,6 +61,18 @@ The Measure Column name is **optional**. It names the column that contains the n
 **Value Column Name***
 
 The Value Column name is **optional**. It names the column that contains the molten values.
+
+**Blanks Behavior**
+
+The Blanks Behavior is **optional**. It controls how the melt function handles blank columns and or rows.
+This is particularly hepful if one provides a range such as `A:C` as the function will automatically trim the array.
+Supported values are:
+ - -1: (Default) No Removal
+ - 0: Removal of blank rows and columns
+ - 1: Removal of blank rows
+ - 2: Removal of blank columns
+
+It is recommended to use this removal only when needed as it is computationally expensive.
 
 ## The Cast Command
 The cast command is almost superfluous given `QUERY` and Pivot Tables exist but it has been included for completeness sake.
