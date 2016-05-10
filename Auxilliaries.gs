@@ -47,6 +47,10 @@ function isRectangularArray(data) {
 }
 
 
+/*
+ * Returns the length of a table.
+ * More generally it returns the length of the longest array within an object.
+ */
 function nRow(o) {
   var keys = Object.keys(o);
   var maxLength = 0
@@ -57,6 +61,7 @@ function nRow(o) {
   }
   return maxLength;
 }
+
 
 /**
  * Creates an associative Object out of a two dimensional array
@@ -86,4 +91,60 @@ function table(data, headers) {
     }
   }
   return output;
+}
+
+
+/**
+ * Checks if a row of a two dimensional array contains only empty strings
+ */
+function rowIsEmpty(a, row) {
+  for (var col in a[row]) {
+    if (a[row][col] !== "" && a[row][col] !== undefined) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+/**
+ * Checks if a column is empty
+ */
+function columnIsEmpty(a, col) {
+  for (var row in a[0]) {
+    if (a[row][col] !== "" && a[row][col] !== undefined) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+/**
+ * Filters a two dimensional array for empty values
+ */
+function filterMatrix(m, behavior) {
+  if (behavior == 0 || behavior == 1) {
+    var row = 0;
+    while(row < m.length) {
+      if (rowIsEmpty(m, row)) {
+        m.splice(row,1);
+        row--;
+      }
+      row++;
+    }
+  }
+  if (behavior == 0 || behavior == 2) {
+    var col = 0;
+    while (col < m[0].length) {
+      if (columnIsEmpty(m, col)) {
+        for (var row in m) {
+          m[row].splice(col, 1);
+        }
+        col--;
+      }
+      col++;
+    }
+  }
+  return m;
 }
