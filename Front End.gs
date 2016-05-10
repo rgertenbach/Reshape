@@ -12,7 +12,7 @@
  * @param {"Revenue"} Value  (Optional) Name of the column containing the molten values
  *  (Default is "value").
  *
- * @param {"Columns"} BlanksBehavior  (Optional) Sets the behavior of how to treat blank 
+ * @param {0} BlanksBehavior  (Optional) Sets the behavior of how to treat blank 
  *  columns and rows.-1 (Default) Does not Filter. 0 Filters out blank rows and columns.
  *  1 Filters blank rows. 2 Filters blank columns.
  *
