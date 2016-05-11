@@ -155,7 +155,7 @@ function filterMatrix(m, behavior) {
  */
 function sheetDate(a) {
   var ms_per_day = 1000 * 60 * 60 * 24;
-  var b = new Date("1899-12-30")
+  var b = new Date(1899, 11, 30)
 
   var utc1 = Date.UTC(a.getFullYear(),
                       a.getMonth(),
