@@ -75,8 +75,16 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
 function cast(Range, MeasureColumn, ValueColumn, defaultValue) {
   defaultValue = defaultValue || "";
   Range = table(Range, 0);
-  Range = castTable(Range, MeasureColumn, ValueColumn, defaultValue)
-  return untable(Range);
+  Range = castTable(Range, MeasureColumn, ValueColumn, defaultValue);
+  Range = untable(Range)
+  for (var row = 1; row < Range.length; row++) {
+    for (var col in Range[row]) {
+      if (Range[row][col] instanceof Date) {
+        Range[row][col] = sheetDate(Range[row][col]);
+      }
+    }
+  }
+  return Range;
 }
 
 
