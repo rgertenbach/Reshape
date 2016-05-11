@@ -148,3 +148,24 @@ function filterMatrix(m, behavior) {
   }
   return m;
 }
+
+
+/**
+ * Converts a JS date object into a Google Sheets Date Value
+ */
+function sheetDate(a) {
+  var ms_per_day = 1000 * 60 * 60 * 24;
+  var b = new Date(1899, 11, 30)
+
+  var utc1 = Date.UTC(a.getFullYear(),
+                      a.getMonth(),
+                      a.getDate(),
+                      a.getHours(),
+                      a.getMinutes(),
+                      a.getSeconds(),
+                      a.getMilliseconds());
+
+  var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return (utc1 - utc2) / ms_per_day;
+}
