@@ -169,3 +169,17 @@ function sheetDate(a) {
 
   return (utc1 - utc2) / ms_per_day;
 }
+
+
+/**
+ * Casts a string to a number of possible, otherwise returns the string.
+ */
+function nativeType(x) { 
+  if (!isNaN(new Date(x).getTime())) {
+    return new Date(x);
+  }
+  if (!isNaN(Number(x))) {
+    return Number(x);
+  } 
+  return x;
+}
