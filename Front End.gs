@@ -102,6 +102,6 @@ function onInstall(e) {
 
 function launch() {
   SpreadsheetApp.getActiveSpreadsheet().toast(
-    "You can now start using Reshape by using the MELT and CAST functions",
+    "You can now start using Reshape by using the MELT and CAST functions. For Help go to Add-ons -> Reshape -> Help -> Learn more.",
     "Reshape enabled");
 }
