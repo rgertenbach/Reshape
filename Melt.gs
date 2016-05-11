@@ -17,7 +17,7 @@ function meltTable(data) {
     idCols.map(function(id) {output[id] = output[id].concat(data[id]);});
     valCols.map(function(col) {
       if(valCols[measure] === col) {
-        output.measure = output.measure.concat(repeat(col, data[col].length));
+        output.measure = output.measure.concat(repeat(nativeType(col), data[col].length));
         output.value   = output.value.concat(data[col]);
       }})
   }
