@@ -38,11 +38,10 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
     }
   }
   
-  for (var row in Range) {
-    for (var col in Range[row]) {
-      if (Range[row][col] instanceof Date) {
-        Range[row][col] = sheetDate(Range[row][col]);
-      }
+  // Convert Dates to Sheets Datevalues before parsing to String
+  for (var col in Range[0]) {
+    if (Range[0][col] instanceof Date) {
+      Range[0][col] = sheetDate(Range[0][col]);
     }
   }
   
