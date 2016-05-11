@@ -37,13 +37,7 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
       Range[0][col] = String(Number(col) + 1);
     }
   }
-  
-  // Convert Dates to Sheets Datevalues before parsing to String
-  for (var col in Range[0]) {
-    if (Range[0][col] instanceof Date) {
-      Range[0][col] = sheetDate(Range[0][col]);
-    }
-  }
+ 
   
   Range = table(Range, 0);
   Measure = Measure || "measure";
@@ -54,6 +48,11 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
   Range = untable(Range);
   Range[0][Range[0].indexOf("measure")] = Measure;
   Range[0][Range[0].indexOf("value")] = Value;
+  
+  // Try to convert Headers back to their native type
+  for (var col in Range[0]) {
+    Range[0][col] = nativeType(Range[0][col]);
+  }
   
   return Range;
 }
@@ -77,13 +76,12 @@ function cast(Range, MeasureColumn, ValueColumn, defaultValue) {
   Range = table(Range, 0);
   Range = castTable(Range, MeasureColumn, ValueColumn, defaultValue);
   Range = untable(Range)
-  for (var row = 1; row < Range.length; row++) {
-    for (var col in Range[row]) {
-      if (Range[row][col] instanceof Date) {
-        Range[row][col] = sheetDate(Range[row][col]);
-      }
-    }
+
+  // Convert headers to native type
+  for (var col in Range[0]) {
+    Range[0][col] = nativeType(Range[0][col]);
   }
+  
   return Range;
 }
 
