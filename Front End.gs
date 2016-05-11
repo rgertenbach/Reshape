@@ -48,7 +48,7 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
   Range[0][Range[0].indexOf("measure")] = Measure;
   Range[0][Range[0].indexOf("value")] = Value;
   
-  for (var row = 1; row < Range.length; row++) {
+  for (var row in Range) {
     for (var col in Range[row]) {
       if (Range[row][col] instanceof Date) {
         Range[row][col] = sheetDate(Range[row][col]);
