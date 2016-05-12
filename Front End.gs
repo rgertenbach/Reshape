@@ -12,7 +12,7 @@
  * @param {"Revenue"} Value  (Optional) Name of the column containing the molten values
  *  (Default is "value").
  *
- * @param {0} BlanksBehavior  (Optional) Sets the behavior of how to treat blank 
+ * @param {0} BlanksBehavior  (Optional) Sets the behavior of how to treat blank
  *  columns and rows.-1 (Default) Does not Filter. 0 Filters out blank rows and columns.
  *  1 Filters blank rows. 2 Filters blank columns.
  *
@@ -24,21 +24,24 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
     BlanksBehavior = -1;
   }
 
+  // Validate blanks behavior
   if (!(BlanksBehavior >= -1 && BlanksBehavior <= 2)) {
     throw "Blanks Behavior invalid";
   }
-  
+
+  // Filter out blank rows and columns
   if (BlanksBehavior != -1) {
     Range = filterMatrix(Range, BlanksBehavior);
   }
-  
+
+  // Give empty headers names
   for (col in Range[0]) {
     if (Range[0][col] === "") {
       Range[0][col] = String(Number(col) + 1);
     }
   }
- 
-  
+
+
   Range = table(Range, 0);
   Measure = Measure || "measure";
   Value = Value || "value";
@@ -48,14 +51,11 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
   Range = untable(Range);
   Range[0][Range[0].indexOf("measure")] = Measure;
   Range[0][Range[0].indexOf("value")] = Value;
-  
-  // Try to convert Headers back to their native type
-  for (var col in Range[0]) {
-    Range[0][col] = nativeType(Range[0][col]);
-  }
-  
+  convertRowToNative(Range, 0);
+
   return Range;
 }
+
 
 /**
  * Casts a long table into a wide format.
@@ -76,12 +76,8 @@ function cast(Range, MeasureColumn, ValueColumn, defaultValue) {
   Range = table(Range, 0);
   Range = castTable(Range, MeasureColumn, ValueColumn, defaultValue);
   Range = untable(Range)
+  convertRowToNative(Range, 0);
 
-  // Convert headers to native type
-  for (var col in Range[0]) {
-    Range[0][col] = nativeType(Range[0][col]);
-  }
-  
   return Range;
 }
 
@@ -95,11 +91,16 @@ function onOpen(e) {
 
 function onInstall(e) {
   onOpen(e);
+  SpreadsheetApp.getActiveSpreadsheet().toast(
+    "Reshape installed successfully.\n\n" +
+    "You can launch this Add-on by clicking on: " +
+    "Add-ons -> Reshape -> Activate");
 }
 
 
 function launch() {
   SpreadsheetApp.getActiveSpreadsheet().toast(
-    "You can now start using Reshape by using the MELT and CAST functions. For Help go to Add-ons -> Reshape -> Help -> Learn more.",
+    "You can now start using Reshape by using the MELT and CAST functions.\n" +
+    "For Help go to Add-ons -> Reshape -> Help -> Learn more.",
     "Reshape enabled");
 }
