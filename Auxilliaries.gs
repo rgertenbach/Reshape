@@ -183,3 +183,14 @@ function nativeType(x) {
   } 
   return x;
 }
+
+
+/*
+ * Converts each coumn of a row of a 2d array to its native type
+ */
+function convertRowToNative(a, row) {
+  row = row || 0;
+  for (var col in a[row]) {
+    a[row][col] = nativeType(a[row][col]);
+  }
+}
