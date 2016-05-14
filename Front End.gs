@@ -20,7 +20,7 @@
  * @customfunction
  */
 function melt(Range, IDs, Measure, Value, BlanksBehavior) {
-  if (BlanksBehavior === undefined) {
+  if (BlanksBehavior === undefined || BlanksBehavior === "") {
     BlanksBehavior = -1;
   }
 
@@ -40,7 +40,6 @@ function melt(Range, IDs, Measure, Value, BlanksBehavior) {
       Range[0][col] = String(Number(col) + 1);
     }
   }
-
 
   Range = table(Range, 0);
   Measure = Measure || "measure";
