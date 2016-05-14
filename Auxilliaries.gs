@@ -194,15 +194,3 @@ function convertRowToNative(a, row) {
     a[row][col] = nativeType(a[row][col]);
   }
 }
-
-
-/*
- * Transforms omitted sheets function parameters from spaces to undefined
- */
-function copeWithArgs(args) {
-  for (arg in args) {
-    if (args[arg] === "") {
-      args[arg] = undefined;
-    }
-  }
-}
