@@ -2,7 +2,10 @@ function meltTable(data) {
   var output = {};
   var columns = Object.keys(data);
   var varArgs = objectToArray(arguments);
-  varArgs.splice(0,1)
+
+  varArgs.splice(0,1);
+  if (varArgs[0] == [""]) {varArgs.splice(0,1)}
+
   var idCols = varArgs;
   var valCols = columns.filter(function(x) {return varArgs.indexOf(x) === -1})
 
