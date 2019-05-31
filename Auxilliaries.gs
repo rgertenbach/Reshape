@@ -112,6 +112,9 @@ function rowIsEmpty(a, row) {
  */
 function columnIsEmpty(a, col) {
   for (var row in a[0]) {
+    if (a[row] == null) {
+      return true;
+    }
     if (a[row][col] !== "" && a[row][col] !== undefined) {
       return false;
     }
